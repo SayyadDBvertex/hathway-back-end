@@ -1,0 +1,28 @@
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    mobile: {
+      type: String,
+      required: true,
+       // Only 10-digit phone numbers
+    },
+
+    address: {
+      type: String,
+      required: true,
+      trim: true,
+    }
+  },
+  { timestamps: true }
+);
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
