@@ -2,13 +2,16 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./conecction/connection.js";
 import formRouter from "./routes/formRouter.js";
+import dotenv from "dotenv";
+
+
 
 const PORT = 3001;
 const app = express();
 
 // Connect Database
 connectDB();
-
+dotenv.config();
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -24,5 +27,5 @@ app.get("/", (req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server Started at http://localhost:${PORT}`);
+    console.log(`Server Started at http://localhost:${process.env.PORT || PORT}`);
 });
