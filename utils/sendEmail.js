@@ -11,6 +11,7 @@ const sendEmail = async (to, subject, message) => {
         pass: process.env.GMAIL_PASS, // Your Gmail App Password
       },
     });
+console.log("ADMIN EMAIL:", process.env.GMAIL_USER);
 
     await transporter.sendMail({
       from: process.env.GMAIL_USER, // SAME as auth user

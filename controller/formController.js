@@ -4,6 +4,7 @@ import sendEmail from "../utils/sendEmail.js";
 export const save = async (req, res) => {
   try {
     const { name, mobile, address, email } = req.body;
+console.log("REQ BODY:", req.body);
 
     // 1. Save to DB
     const user = await userSchema.create({ name, mobile, address, email });
