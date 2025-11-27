@@ -6,12 +6,13 @@ import dotenv from "dotenv";
 
 
 
-const PORT = 3025;
+const PORT = process.env.PORT || 3025;
 const app = express();
 
+// Load environment variables first
+dotenv.config();
 // Connect Database
 connectDB();
-dotenv.config();
 // Middlewares
 app.use(cors({
     origin: "*",
@@ -33,5 +34,5 @@ app.get("/", (req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server Started at http://localhost:${process.env.PORT || PORT}`);
+    console.log(`Server Started at http://localhost:${PORT}`);
 });

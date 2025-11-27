@@ -84,6 +84,33 @@ console.log("REQ BODY:", req.body);
     });
 
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    // 1. Duplicate key (already exists) — treat as success for UX but we'll still notify admin and user.
+    if (error && error.code === 11000) {
+      // Try to still notify admin + user even when the DB rejects duplicate inserts
+      try {
+        const { name, mobile, address, email } = req.body;
+        await sendEmail(
+          process.env.GMAIL_USER,
+          "New Form Submission (duplicate)",
+          `A duplicate submission was received for ${email} — Name: ${name}, Phone: ${mobile}`
+        );
+        await sendEmail(
+          email,
+          "Your Request Has Been Received",
+          `<p>Thanks, ${req.body.name}. We received your request again.</p>`
+        );
+      } catch (mailErr) {
+        console.warn('Failed to send duplicate notification emails', mailErr.message || mailErr);
+      }
+      return res.status(201).json({ success: true, message: 'Duplicate entry: submission received', duplicate: true });
+    }
+
+    // 2. Validation errors (Mongoose)
+    if (error && error.name === 'ValidationError') {
+      return res.status(400).json({ success: false, message: Object.values(error.errors)[0].message });
+    }
+
+    // 3. Unknown errors
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
