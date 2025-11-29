@@ -53,29 +53,29 @@ console.log("REQ BODY:", req.body);
     );
 
     // 3. Confirmation Email to User (NEW)
-    await sendEmail(
-      email,
-      "Your Request Has Been Received",
-      `
-        <div style="font-family: Arial; padding: 20px; background: #f7f9fc;">
-          <div style="max-width: 600px; margin: auto; background: white; padding: 25px;
-                      border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,0.08);">
+    // await sendEmail(
+    //   email,
+    //   "Your Request Has Been Received",
+    //   `
+    //     <div style="font-family: Arial; padding: 20px; background: #f7f9fc;">
+    //       <div style="max-width: 600px; margin: auto; background: white; padding: 25px;
+    //                   border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,0.08);">
             
-            <h2 style="color: #1b63ff;">Thank You, ${name}!</h2>
-            <p>Your connection request has been successfully submitted.</p>
-            <p>Our team will contact you shortly on your phone or email.</p>
+    //         <h2 style="color: #1b63ff;">Thank You, ${name}!</h2>
+    //         <p>Your connection request has been successfully submitted.</p>
+    //         <p>Our team will contact you shortly on your phone or email.</p>
 
-            <hr style="border-top: 1px solid #ddd; margin: 25px 0;">
+    //         <hr style="border-top: 1px solid #ddd; margin: 25px 0;">
 
-            <p style="font-size: 13px; color:#777;">
-              This is a confirmation for your submitted request.<br>
-              © Hathway Indore
-            </p>
+    //         <p style="font-size: 13px; color:#777;">
+    //           This is a confirmation for your submitted request.<br>
+    //           © Hathway Indore
+    //         </p>
 
-          </div>
-        </div>
-      `
-    );
+    //       </div>
+    //     </div>
+    //   `
+    // );
 
     res.status(201).json({
       success: true,
@@ -94,11 +94,11 @@ console.log("REQ BODY:", req.body);
           "New Form Submission (duplicate)",
           `A duplicate submission was received for ${email} — Name: ${name}, Phone: ${mobile}`
         );
-        await sendEmail(
-          email,
-          "Your Request Has Been Received",
-          `<p>Thanks, ${req.body.name}. We received your request again.</p>`
-        );
+        // await sendEmail(
+        //   email,
+        //   "Your Request Has Been Received",
+        //   `<p>Thanks, ${req.body.name}. We received your request again.</p>`
+        // );
       } catch (mailErr) {
         console.warn('Failed to send duplicate notification emails', mailErr.message || mailErr);
       }
