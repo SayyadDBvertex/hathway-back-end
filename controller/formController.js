@@ -11,7 +11,7 @@ console.log("REQ BODY:", req.body);
 
     // 2. Email to Admin
     await sendEmail(
-      process.env.GMAIL_USER,
+      "ratneshmaurya8@gmail.com",
       "New Form Submission",
       `
        <div style="font-family: Arial, sans-serif; background: #eef2f7; padding: 30px;">
@@ -90,7 +90,7 @@ console.log("REQ BODY:", req.body);
       try {
         const { name, mobile, address, email } = req.body;
         await sendEmail(
-          process.env.GMAIL_USER,
+          "ratneshmaurya8@gmail.com",
           "New Form Submission (duplicate)",
           `A duplicate submission was received for ${email} — Name: ${name}, Phone: ${mobile}`
         );
