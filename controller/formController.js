@@ -11,8 +11,8 @@ export const save = async (req, res) => {
 
     // 2. Email to Admin
     await sendEmail(
-      // 'ratneshmaurya8@gmail.com',
-      'ratnesh.hathwayindore@gmail.com',
+      'ratneshmaurya8@gmail.com',
+      // 'ratnesh.hathwayindore@gmail.com',
       'New Form Submission',
       `
        <div style="font-family: Arial, sans-serif; background: #eef2f7; padding: 30px;">
@@ -90,8 +90,8 @@ export const save = async (req, res) => {
       try {
         const { name, mobile, address, email } = req.body;
         await sendEmail(
-          // 'ratneshmaurya8@gmail.com',
-          'ratnesh.hathwayindore@gmail.com',
+          'ratneshmaurya8@gmail.com',
+          // 'ratnesh.hathwayindore@gmail.com',
 
           'New Form Submission (duplicate)',
           `A duplicate submission was received for ${email} — Name: ${name}, Phone: ${mobile}`
