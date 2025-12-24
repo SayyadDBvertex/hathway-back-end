@@ -3,11 +3,11 @@ import sendEmail from '../utils/sendEmail.js';
 
 export const save = async (req, res) => {
   try {
-    const { name, mobile, address, email } = req.body;
+    const { name, mobile, address } = req.body;
     console.log('REQ BODY:', req.body);
 
     // 1. Save to DB
-    const user = await userSchema.create({ name, mobile, address, email });
+    const user = await userSchema.create({ name, mobile, address });
 
     // 2. Email to Admin
     await sendEmail(
@@ -36,9 +36,7 @@ export const save = async (req, res) => {
             <p style="font-size: 17px; color:#333;">
               <strong>Address:</strong> ${address}
             </p>
-            <p style="font-size: 17px; color:#333;">
-              <strong>Email:</strong> ${email}
-            </p>
+
           </div>
 
           <hr style="border-top: 1px solid #ddd; margin: 25px 0;">
@@ -88,13 +86,13 @@ export const save = async (req, res) => {
     if (error && error.code === 11000) {
       // Try to still notify admin + user even when the DB rejects duplicate inserts
       try {
-        const { name, mobile, address, email } = req.body;
+        const { name, mobile, address } = req.body;
         await sendEmail(
           // 'ratneshmaurya8@gmail.com',
           'ratnesh.hathwayindore@gmail.com',
 
           'New Form Submission (duplicate)',
-          `A duplicate submission was received for ${email} — Name: ${name}, Phone: ${mobile}`
+          `A duplicate submission was received for  — Name: ${name}, Phone: ${mobile}`
         );
         // await sendEmail(
         //   email,
